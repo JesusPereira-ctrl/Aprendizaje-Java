@@ -1,28 +1,32 @@
 import java.util.Scanner;
 
-public class EjemploArreglosDesplazarPosicion2 {
+public class EjemploArreglosDesplazarPosicion3 {
     public static void main() {
-        int[] a = new int[10];
-        int elemento, posicion;
+        int[] a = new int[7];
+        int numero, posicion;
+
         Scanner s = new Scanner(System.in);
 
         for (int i = 0; i < a.length - 1; i++) {
-            System.out.print("Ingrese el numero: ");
+            System.out.print("Ingrese un numero: ");
             a[i] = s.nextInt();
         }
         System.out.println();
 
-        System.out.println("Nuevo Elemento: ");
-        elemento = s.nextInt();
+        System.out.println("Ingrese un numero a insertar:");
+        numero = s.nextInt();
 
-        System.out.println("Posición donde agregar (0, 9)");
-        posicion = s.nextInt();
+        posicion = 0;
+        while (posicion < 6 && numero > a[posicion]) {
+            posicion++;
+        }
 
         for (int i = a.length - 2; i >= posicion; i--) {
             a[i + 1] = a[i];
         }
-        a[posicion] = elemento;
 
+        a[posicion] = numero;
+        System.out.println("El nuevo arreglo ordenado:");
         for (int i = 0; i < a.length; i++) {
             System.out.println("Para el indice " + i + " valor: " + a[i]);
         }
