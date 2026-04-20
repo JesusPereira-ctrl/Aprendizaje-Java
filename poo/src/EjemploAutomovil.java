@@ -1,18 +1,39 @@
+import java.util.Date;
+
 public class EjemploAutomovil {
     public static void main(String[] args) {
 
+        Motor motorSubaru = new Motor(2.0, TipoMotor.BENCINA);
         Automovil subaru = new Automovil("Subaru", "Impreza");
-        subaru.setCilindrada(2.0);
-        subaru.setColor("Blanco");
+        subaru.setMotor(motorSubaru);
+        subaru.setEstanque(new Estanque());
+        subaru.setColor(Color.BLANCO);
 
-        Automovil mazda = new Automovil("Mazda", "BT-50", "Rojo", 3.0);
+        Motor motorMazda = new Motor(3.0, TipoMotor.DIESEL);
+        Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO, motorMazda);
+        mazda.setEstanque(new Estanque(45));
         System.out.println("mazda.leerFabricante() = " + mazda.getFabricante());
 
-        Automovil nissan = new Automovil("Nissan", "Navara", "Gris oscuro", 3.5, 50);
+        Automovil nissan = new Automovil("Nissan", "Navara", Color.GRIS,
+                new Motor(4.0, TipoMotor.DIESEL), new Estanque(50));
+
+        Automovil nissan2 = new Automovil("Nissan", "Navara", Color.GRIS,
+                new Motor(3.5, TipoMotor.BENCINA), new Estanque(50));
+
+        Automovil auto = new Automovil();
+        Date fecha = new Date();
+
+        System.out.println("Nissan es igual a Nissan2 con comparación lógica = " + (nissan == nissan2));
+        System.out.println("Nissan es igual a Nissan2 con equals = " + (nissan.equals(nissan2)));
 
         System.out.println(subaru.verDetalle());
         System.out.println(mazda.verDetalle());
         System.out.println(nissan.verDetalle());
+
+        System.out.println("auto es igual a una fecha = " + auto.equals(fecha));
+
+        System.out.println("Nissan = " + nissan);
+        System.out.println("Nissan = " + nissan.toString());
 
         System.out.println(subaru.acelerar(3000));
         System.out.println(subaru.frenar());
@@ -21,7 +42,6 @@ public class EjemploAutomovil {
 
         System.out.println("Kilómetros por litro: " + subaru.calcularConsumo(300, 0.6f));
         System.out.println("Kilómetros por litro: " + subaru.calcularConsumo(300, 60));
-
         System.out.println("Kilómetros por litro: " + nissan.calcularConsumo(300, 60));
     }
 }
