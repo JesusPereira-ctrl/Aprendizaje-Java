@@ -1,5 +1,5 @@
 package org.jesus.poointerfaces.repositorio;
 
-public interface OrdenablePaginableCrudRepositorio extends OrdenableRepositorio,
-                        PaginableRepositorio, CrudRespositorio, ContableRepositorio {
+public interface OrdenablePaginableCrudRepositorio<T> extends OrdenableRepositorio<T>,
+                        PaginableRepositorio<T>, CrudRespositorio<T>, ContableRepositorio {
 }

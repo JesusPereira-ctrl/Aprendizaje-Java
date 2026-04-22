@@ -1,50 +1,19 @@
-package org.jesus.poointerfaces.repositorio;
+package org.jesus.poointerfaces.repositorio.lista;
 
 import org.jesus.poointerfaces.modelo.Cliente;
+import org.jesus.poointerfaces.repositorio.AbstractaListRepositorio;
+import org.jesus.poointerfaces.repositorio.Direccion;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio {
-
-    private List<Cliente> dataSource;
-
-    public ClienteListRepositorio() {
-        this.dataSource = new ArrayList<>();
-    }
-
-    @Override
-    public List<Cliente> listar() {
-        return this.dataSource;
-    }
-
-    @Override
-    public Cliente porId(Integer id) {
-        Cliente resultado = null;
-        for (Cliente cli : this.dataSource) {
-            if (cli.getId() != null && cli.getId().equals(id)) {
-                resultado = cli;
-                break;
-            }
-        }
-        return resultado;
-    }
-
-    @Override
-    public void crear(Cliente cliente) {
-        this.dataSource.add(cliente);
-    }
+public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
 
     @Override
     public void editar(Cliente cliente) {
         Cliente c = this.porId(cliente.getId());
         c.setNombre(cliente.getNombre());
         c.setApellido(cliente.getApellido());
-    }
-
-    @Override
-    public void eliminar(Integer id) {
-        this.dataSource.remove(this.porId(id));
     }
 
     @Override
@@ -62,11 +31,6 @@ public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio
         return listaOrdenada;
     }
 
-    @Override
-    public List<Cliente> listar(int desde, int hasta) {
-        return this.dataSource.subList(desde, hasta);
-    }
-
     public static int ordenar(String campo, Cliente a, Cliente b) {
         int resultado = 0;
         switch (campo) {
@@ -78,10 +42,5 @@ public class ClienteListRepositorio implements OrdenablePaginableCrudRepositorio
                     resultado = a.getApellido().compareTo(b.getApellido());
         }
         return  resultado;
-    }
-
-    @Override
-    public int total() {
-        return this.dataSource.size();
     }
 }
