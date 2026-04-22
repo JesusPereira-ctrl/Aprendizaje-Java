@@ -1,0 +1,14 @@
+package org.jesus.poointerfaces.imprenta.modelo;
+
+public interface Imprimible {
+
+    String TEXTO_DEFECTO = "Imprimiendo un valor por defecto";
+
+    default String imprimir() {
+        return Imprimible.TEXTO_DEFECTO;
+    }
+
+    static void imprimir(Imprimible imprimible) {
+        System.out.println(imprimible.imprimir());
+    }
+}
