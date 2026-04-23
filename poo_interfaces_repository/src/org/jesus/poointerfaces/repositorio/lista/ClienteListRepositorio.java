@@ -3,6 +3,7 @@ package org.jesus.poointerfaces.repositorio.lista;
 import org.jesus.poointerfaces.modelo.Cliente;
 import org.jesus.poointerfaces.repositorio.AbstractaListRepositorio;
 import org.jesus.poointerfaces.repositorio.Direccion;
+import org.jesus.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
 
     @Override
-    public void editar(Cliente cliente) {
+    public void editar(Cliente cliente) throws LecturaAccesoDatoException {
         Cliente c = this.porId(cliente.getId());
         c.setNombre(cliente.getNombre());
         c.setApellido(cliente.getApellido());
@@ -34,13 +35,10 @@ public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
     public static int ordenar(String campo, Cliente a, Cliente b) {
         int resultado = 0;
         switch (campo) {
-            case "id" ->
-                    resultado = a.getId().compareTo(b.getId());
-            case "nombre" ->
-                    resultado = a.getNombre().compareTo(b.getNombre());
-            case "apellido" ->
-                    resultado = a.getApellido().compareTo(b.getApellido());
+            case "id" -> resultado = a.getId().compareTo(b.getId());
+            case "nombre" -> resultado = a.getNombre().compareTo(b.getNombre());
+            case "apellido" -> resultado = a.getApellido().compareTo(b.getApellido());
         }
-        return  resultado;
+        return resultado;
     }
 }

@@ -3,6 +3,7 @@ package org.jesus.poointerfaces.repositorio.lista;
 import org.jesus.poointerfaces.modelo.Producto;
 import org.jesus.poointerfaces.repositorio.AbstractaListRepositorio;
 import org.jesus.poointerfaces.repositorio.Direccion;
+import org.jesus.poointerfaces.repositorio.excepciones.LecturaAccesoDatoException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public class ProductoListRepositorio extends AbstractaListRepositorio<Producto> {
 
     @Override
-    public void editar(Producto producto) {
+    public void editar(Producto producto) throws LecturaAccesoDatoException {
         Producto p = this.porId(producto.getId());
         p.setDescripcion(producto.getDescripcion());
         p.setPrecio(producto.getPrecio());
@@ -34,13 +35,10 @@ public class ProductoListRepositorio extends AbstractaListRepositorio<Producto> 
     public static int ordenar(String campo, Producto a, Producto b) {
         int resultado = 0;
         switch (campo) {
-            case "id" ->
-                    resultado = a.getId().compareTo(b.getId());
-            case "descripcion" ->
-                    resultado = a.getDescripcion().compareTo(b.getDescripcion());
-            case "precio" ->
-                    resultado = a.getPrecio().compareTo(b.getPrecio());
+            case "id" -> resultado = a.getId().compareTo(b.getId());
+            case "descripcion" -> resultado = a.getDescripcion().compareTo(b.getDescripcion());
+            case "precio" -> resultado = a.getPrecio().compareTo(b.getPrecio());
         }
-        return  resultado;
+        return resultado;
     }
 }
